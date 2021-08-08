@@ -1,4 +1,4 @@
-package in.shabhushan.lld.expense.dto;
+package in.shabhushan.lld.expense.dto.request;
 
 import lombok.Data;
 import lombok.NonNull;

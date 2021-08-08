@@ -1,4 +1,4 @@
-package in.shabhushan.lld.expense.dto;
+package in.shabhushan.lld.expense.dto.response;
 
 import in.shabhushan.lld.expense.entity.User;
 import lombok.Data;

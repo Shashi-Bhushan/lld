@@ -1,9 +1,10 @@
 package in.shabhushan.lld.expense.service;
 
-import in.shabhushan.lld.expense.dto.AmountOwedResponseDTO;
-import in.shabhushan.lld.expense.dto.ExpenseRequestDTO;
-import in.shabhushan.lld.expense.dto.SettleUpResponse;
+import in.shabhushan.lld.expense.dto.response.AmountOwedDTO;
+import in.shabhushan.lld.expense.dto.request.ExpenseRequestDTO;
+import in.shabhushan.lld.expense.dto.response.SettleUpResponse;
 import in.shabhushan.lld.expense.entity.Expense;
+import in.shabhushan.lld.expense.entity.Group;
 import in.shabhushan.lld.expense.entity.User;
 import in.shabhushan.lld.expense.repository.ExpenseRepository;
 import in.shabhushan.lld.expense.repository.UserRepository;
@@ -63,7 +64,26 @@ public class ExpenseService {
         return output.stream().filter(a -> a.getSender().equals(user)).collect(Collectors.toList());
     }
 
-    public AmountOwedResponseDTO getAmountOwed(User user) {
+    public List<SettleUpResponse> settleExpense(Group group) {
+        Set<Expense> expenseHistory = new HashSet<>();
+
+        for (User user: group.getUsers()) {
+            expenseHistory.addAll(getExpenseHistory(user));
+        }
+
+        List<SettleUpResponse> output = new ArrayList<>();
+
+        for (Expense expense: expenseHistory) {
+            output.addAll(settleExpense(expense));
+        }
+
+        return output.stream()
+                // sender is user of group
+                .filter(a -> group.getUsers().contains(a.getSender()))
+                .collect(Collectors.toList());
+    }
+
+    public AmountOwedDTO getAmountOwed(User user) {
         // get All expenses this user is part of
         Set<Expense> expenseHistory = getExpenseHistory(user);
 
@@ -81,7 +101,7 @@ public class ExpenseService {
             }
         }
 
-        return new AmountOwedResponseDTO(creditors);
+        return new AmountOwedDTO(creditors);
     }
 
     public List<SettleUpResponse> settleExpense(Expense expense) {

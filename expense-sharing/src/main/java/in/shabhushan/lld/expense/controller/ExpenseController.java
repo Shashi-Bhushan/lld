@@ -1,8 +1,8 @@
 package in.shabhushan.lld.expense.controller;
 
-import in.shabhushan.lld.expense.dto.AmountOwedResponseDTO;
-import in.shabhushan.lld.expense.dto.ExpenseRequestDTO;
-import in.shabhushan.lld.expense.dto.SettleUpResponse;
+import in.shabhushan.lld.expense.dto.response.AmountOwedDTO;
+import in.shabhushan.lld.expense.dto.request.ExpenseRequestDTO;
+import in.shabhushan.lld.expense.dto.response.SettleUpResponse;
 import in.shabhushan.lld.expense.entity.Expense;
 import in.shabhushan.lld.expense.entity.Group;
 import in.shabhushan.lld.expense.entity.User;
@@ -37,11 +37,10 @@ public class ExpenseController {
     }
 
     public List<SettleUpResponse> settleExpense(Group group) {
-        //return expenseService.settleExpense(expense);
-        return null;
+        return expenseService.settleExpense(group);
     }
 
-    public AmountOwedResponseDTO getAmountOwed(User user) {
+    public AmountOwedDTO getAmountOwed(User user) {
         return expenseService.getAmountOwed(user);
     }
 }
