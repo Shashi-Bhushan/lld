@@ -13,6 +13,7 @@ import in.shabhushan.lld.expense.strategy.SplitStrategy;
 import in.shabhushan.lld.expense.strategy.SplitStrategyFactory;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class ExpenseService {
 
@@ -48,6 +49,39 @@ public class ExpenseService {
         expenseRepository.createExpense(expense);
 
         return expense;
+    }
+
+    public List<SettleUpResponse> settleExpense(User user) {
+        Set<Expense> expenseHistory = getExpenseHistory(user);
+
+        List<SettleUpResponse> output = new ArrayList<>();
+
+        for (Expense expense: expenseHistory) {
+            output.addAll(settleExpense(expense));
+        }
+
+        return output.stream().filter(a -> a.getSender().equals(user)).collect(Collectors.toList());
+    }
+
+    public AmountOwedResponseDTO getAmountOwed(User user) {
+        // get All expenses this user is part of
+        Set<Expense> expenseHistory = getExpenseHistory(user);
+
+        Map<User, Double> creditors = new HashMap<>();
+
+        for (Expense expense: expenseHistory) {
+            if (!expense.isSettled()) {
+                settleExpense(expense);
+            }
+
+            List<Map.Entry<User, Double>> creditor = expense.getCreditors().getOrDefault(user, new ArrayList<>());
+
+            for (Map.Entry<User, Double> c: creditor) {
+                creditors.put(c.getKey(), creditors.getOrDefault(c.getKey(), 0.0) + c.getValue());
+            }
+        }
+
+        return new AmountOwedResponseDTO(creditors);
     }
 
     public List<SettleUpResponse> settleExpense(Expense expense) {
@@ -111,28 +145,7 @@ public class ExpenseService {
         return settleUpResponses;
     }
 
-    public AmountOwedResponseDTO getAmountOwed(User user) {
-        // get All expenses this user is part of
-        Set<Expense> expenseHistory = getExpenseHistory(user);
-
-        Map<User, Double> creditors = new HashMap<>();
-
-        for (Expense expense: expenseHistory) {
-            if (!expense.isSettled()) {
-                settleExpense(expense);
-            }
-
-            List<Map.Entry<User, Double>> creditor = expense.getCreditors().getOrDefault(user, new ArrayList<>());
-
-            for (Map.Entry<User, Double> c: creditor) {
-                creditors.put(c.getKey(), creditors.getOrDefault(c.getKey(), 0.0) + c.getValue());
-            }
-        }
-
-        return new AmountOwedResponseDTO(creditors);
-    }
-
-    public Set<Expense> getExpenseHistory(User user) {
+    private Set<Expense> getExpenseHistory(User user) {
         // get All expenses this user is part of
         return expenseRepository.getAllExpensesByUser(user);
     }
