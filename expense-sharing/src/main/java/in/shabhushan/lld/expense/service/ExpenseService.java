@@ -31,13 +31,34 @@ public class ExpenseService {
      * Get User who created Expense
      * Get All participants
      * Get/Create Group and Total amount to be paid
-     *
+     * <p>
      * Get amount paid by creator
      * Get amount owed by participants
      */
-    public Expense createExpense(ExpenseRequestDTO expenseDTO, String splitStrategyTerm, Map<User, Double> amountPaid,  String paymentStrategyTerm) {
+    public Expense createExpense(ExpenseRequestDTO expenseDTO, String splitStrategyTerm, Map<User, Double> amountPaid, String paymentStrategyTerm) {
+        if (expenseDTO.getGroup() != null) {
+            return createExpenseForGroup(expenseDTO, splitStrategyTerm, amountPaid, paymentStrategyTerm);
+        } else {
+            User creator = userRepository.getUserByID(expenseDTO.getCreator());
+            Set<User> participants = userRepository.getAllUsersByID(expenseDTO.getParticipants());
+
+            Expense expense = new Expense(expenseDTO.getName(), expenseDTO.getDesc(), expenseDTO.getAmount(), creator, participants);
+
+            PaymentStrategy paymentStrategy = PaymentStrategyFactory.forName(paymentStrategyTerm);
+            paymentStrategy.calculatePaidAmount(expense, amountPaid);
+
+            SplitStrategy splitStrategy = SplitStrategyFactory.forName(splitStrategyTerm);
+            splitStrategy.calculateAmountOwed(expense);
+
+            expenseRepository.createExpense(expense);
+
+            return expense;
+        }
+    }
+
+    private Expense createExpenseForGroup(ExpenseRequestDTO expenseDTO, String splitStrategyTerm, Map<User, Double> amountPaid, String paymentStrategyTerm) {
         User creator = userRepository.getUserByID(expenseDTO.getCreator());
-        Set<User> participants = userRepository.getAllUsersByID(expenseDTO.getParticipants());
+        Set<User> participants = expenseDTO.getGroup().getUsers();
 
         Expense expense = new Expense(expenseDTO.getName(), expenseDTO.getDesc(), expenseDTO.getAmount(), creator, participants);
 
@@ -57,7 +78,7 @@ public class ExpenseService {
 
         List<SettleUpResponse> output = new ArrayList<>();
 
-        for (Expense expense: expenseHistory) {
+        for (Expense expense : expenseHistory) {
             output.addAll(settleExpense(expense));
         }
 
@@ -65,15 +86,11 @@ public class ExpenseService {
     }
 
     public List<SettleUpResponse> settleExpense(Group group) {
-        Set<Expense> expenseHistory = new HashSet<>();
-
-        for (User user: group.getUsers()) {
-            expenseHistory.addAll(getExpenseHistory(user));
-        }
+        Set<Expense> expenseHistory = group.getExpenses();
 
         List<SettleUpResponse> output = new ArrayList<>();
 
-        for (Expense expense: expenseHistory) {
+        for (Expense expense : expenseHistory) {
             output.addAll(settleExpense(expense));
         }
 
@@ -89,14 +106,14 @@ public class ExpenseService {
 
         Map<User, Double> creditors = new HashMap<>();
 
-        for (Expense expense: expenseHistory) {
+        for (Expense expense : expenseHistory) {
             if (!expense.isSettled()) {
                 settleExpense(expense);
             }
 
             List<Map.Entry<User, Double>> creditor = expense.getCreditors().getOrDefault(user, new ArrayList<>());
 
-            for (Map.Entry<User, Double> c: creditor) {
+            for (Map.Entry<User, Double> c : creditor) {
                 creditors.put(c.getKey(), creditors.getOrDefault(c.getKey(), 0.0) + c.getValue());
             }
         }
@@ -110,7 +127,7 @@ public class ExpenseService {
 
         Set<User> participants = expense.getParticipants();
 
-        for (User user: participants) {
+        for (User user : participants) {
             Double owed = expense.getAmountOwed().get(user);
 
             if (owed < 0) {
@@ -135,7 +152,7 @@ public class ExpenseService {
             User receiverUser = receiver.getKey();
             User senderUser = sender.getKey();
 
-            if(Objects.equals(senderAmount, -1 * receiverAmount)) {
+            if (Objects.equals(senderAmount, -1 * receiverAmount)) {
                 settleUpResponses.add(new SettleUpResponse(receiverUser, senderUser, senderAmount)); // or -1 * receiverAmount
             } else if (-1 * receiverAmount > senderAmount) {
                 // receiver still hasn't received full amount owed to him

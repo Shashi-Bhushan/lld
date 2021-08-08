@@ -1,5 +1,6 @@
 package in.shabhushan.lld.expense.dto.request;
 
+import in.shabhushan.lld.expense.entity.Group;
 import lombok.Data;
 import lombok.NonNull;
 import lombok.Singular;
@@ -14,8 +15,11 @@ public class ExpenseRequestDTO {
     @NonNull
     private String desc;
 
-    @NonNull @Singular
+    @Singular
     private Set<Integer> participants;
+
+    @Singular
+    private Group group;
 
     @NonNull
     private Integer creator;

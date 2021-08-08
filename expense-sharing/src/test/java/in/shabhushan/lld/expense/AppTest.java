@@ -80,7 +80,8 @@ public class AppTest {
     @Test
     public void testApplication() {
         ExpenseRequestDTO expenseRequest = new ExpenseRequestDTO("Restaurant", "restaurant Bill for birthday party",
-                Set.of(userOne.getId(), userTwo.getId(), userThree.getId()), userOne.getId(), 3000);
+                userOne.getId(), 3000);
+        expenseRequest.setParticipants(Set.of(userOne.getId(), userTwo.getId(), userThree.getId()));
 
         Expense expense = expenseController.createExpense(expenseRequest, "EqualPayment",
                 Map.ofEntries(entry(userOne, 2500.0), entry(userTwo, 500.0), entry(userThree, 0.0)), "MultiPay");
@@ -102,7 +103,8 @@ public class AppTest {
         }
 
         expenseRequest = new ExpenseRequestDTO("Airport Bill", "airport Bill for lounge",
-                Set.of(userOne.getId(), userTwo.getId(), userThree.getId(), userFour.getId()), userOne.getId(), 400);
+                userOne.getId(), 400);
+        expenseRequest.setParticipants(Set.of(userOne.getId(), userTwo.getId(), userThree.getId(), userFour.getId()));
 
         expense = expenseController.createExpense(expenseRequest, "EqualPayment",
                 Map.ofEntries(entry(userOne, 200.0), entry(userTwo, 200.0), entry(userThree, 0.0), entry(userFour, 0.0)), "MultiPay");
@@ -124,7 +126,8 @@ public class AppTest {
         }
 
         expenseRequest = new ExpenseRequestDTO("Airport Bill", "airport Bill for lounge",
-                Set.of(userOne.getId(), userTwo.getId(), userThree.getId(), userFour.getId()), userOne.getId(), 400);
+                userOne.getId(), 400);
+        expenseRequest.setParticipants(Set.of(userOne.getId(), userTwo.getId(), userThree.getId(), userFour.getId()));
 
         expense = expenseController.createExpense(expenseRequest, "EqualPayment",
                 Map.ofEntries(entry(userOne, 400.0)), "SelfPay");
@@ -149,7 +152,8 @@ public class AppTest {
         ///////////////////////////
 
         expenseRequest = new ExpenseRequestDTO("Airport Bill", "airport Bill for lounge",
-                Set.of(userOne.getId(), userTwo.getId(), userThree.getId(), userFour.getId()), userOne.getId(), 2400);
+                userOne.getId(), 2400);
+        expenseRequest.setParticipants(Set.of(userOne.getId(), userTwo.getId(), userThree.getId(), userFour.getId()));
 
         expense = expenseController.createExpense(expenseRequest, "EqualPayment",
                 Map.ofEntries(entry(userOne, 800.0), entry(userThree, 1600.0)), "MultiPay");
@@ -160,14 +164,20 @@ public class AppTest {
 
         assertFalse(settleUpResponses.isEmpty());
 
-        assertTrue(settleUpResponses.stream().anyMatch(res -> res.getReceiver().equals(userThree) && res.getAmount() == 400.0d));
-        assertTrue(settleUpResponses.stream().anyMatch(res -> res.getReceiver().equals(userOne) && res.getAmount() == 200.0d));
+        // In one of the settles transactions
+        // 2 gives 400 to 3 and 200 to 1 OR
+        // 2 gives 600 to 3
+        assertTrue(settleUpResponses.stream().anyMatch(res -> res.getReceiver().equals(userThree) && (res.getAmount() == 400.0d || res.getAmount() == 600.0d)));
+        // 2 gives 200 to 1 OR
+        // 2 gives 0 to 1 (if he gives 600 to 3)
+        // due to no transaction with 0 getting recorded, can't assert this case
+        // assertTrue(settleUpResponses.stream().anyMatch(res -> res.getReceiver().equals(userOne) && (res.getAmount() == 200.0d || res.getAmount() == 0.0d)));
 
 
         // Test settleExpense(Group)
         ///////////////////////////
         settleUpResponses = expenseController.settleExpense(group);
 
-        System.out.println(settleUpResponses);
+        assertTrue(settleUpResponses.isEmpty());
     }
 }

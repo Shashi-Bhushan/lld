@@ -1,6 +1,7 @@
 package in.shabhushan.lld.expense.controller;
 
 import in.shabhushan.lld.expense.dto.request.CreateGroupDTO;
+import in.shabhushan.lld.expense.entity.Expense;
 import in.shabhushan.lld.expense.entity.Group;
 import in.shabhushan.lld.expense.entity.User;
 import in.shabhushan.lld.expense.repository.GroupRepository;
