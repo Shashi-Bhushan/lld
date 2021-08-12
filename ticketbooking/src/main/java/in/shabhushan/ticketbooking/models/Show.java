@@ -17,13 +17,13 @@ public class Show extends BaseEntity {
     private Hall hall;
 
 
-//    @OneToOne(
-//            mappedBy = "show",
-//            cascade = CascadeType.ALL,
-//            fetch = FetchType.EAGER,
-//            orphanRemoval = true
-//    )
-//    private ShowSeat showSeat;
+    @OneToOne(
+            mappedBy = "show",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER,
+            orphanRemoval = true
+    )
+    private ShowSeat showSeat;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "movie_id", nullable = false)

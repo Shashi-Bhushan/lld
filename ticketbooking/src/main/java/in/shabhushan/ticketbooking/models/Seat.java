@@ -19,6 +19,11 @@ public class Seat extends BaseEntity {
     @JoinColumn(name = "hall_id", nullable = false)
     private Hall hall;
 
-//    @OneToOne(optional=false, mappedBy="showSeat")
-//    private ShowSeat showSeat;
+    @OneToOne(
+            mappedBy = "seat",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER,
+            orphanRemoval = true
+    )
+    private ShowSeat showSeat;
 }

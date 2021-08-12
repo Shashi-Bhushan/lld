@@ -5,10 +5,17 @@ import javax.persistence.*;
 @Entity
 @Table(name = "show_seats")
 public class ShowSeat extends BaseEntity {
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "hallseat_id", nullable = false)
-    private Seat hallSeat;
+    @Column(name = "seat_status")
+    private String seatStatus;
 
-//    @OneToOne(optional=false, mappedBy="showSeat")
-//    private Show show;
+    @Column(name = "price")
+    private Integer price;
+
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "seat_id", nullable = false)
+    private Seat seat;
+
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "show_id", nullable = false, unique = true)
+    private Show show;
 }
