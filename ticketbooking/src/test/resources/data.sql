@@ -1,0 +1,20 @@
+INSERT INTO movies (create_time, update_time, director, duration_minutes, language, name, producer, release_date) values (UTC_TIMESTAMP(), UTC_TIMESTAMP(), "Terence Fisher", 87, 0, "The Hound of Baskervilles", "Anthony Hinds", STR_TO_DATE('4,5,1959','%d,%m,%Y'));
+INSERT INTO movies (create_time, update_time, director, duration_minutes, language, name, producer, release_date) values (UTC_TIMESTAMP(), UTC_TIMESTAMP(), "The Wachowskis", 136, 0, "The Matrix", "Joel Silver", STR_TO_DATE('24,3,1999','%d,%m,%Y'));
+INSERT INTO movies (create_time, update_time, director, duration_minutes, language, name, producer, release_date) values (UTC_TIMESTAMP(), UTC_TIMESTAMP(), "The Wachowskis", 138, 0, "The Matrix Reloaded", "Joel Silver", STR_TO_DATE('15,5,2003','%d,%m,%Y'));
+INSERT INTO movies (create_time, update_time, director, duration_minutes, language, name, producer, release_date) values (UTC_TIMESTAMP(), UTC_TIMESTAMP(), "The Wachowskis", 129, 0, "The Matrix Revolutions", "Joel Silver", STR_TO_DATE('5,11,2003','%d,%m,%Y'));
+INSERT INTO movies (create_time, update_time, director, duration_minutes, language, name, producer, release_date) values (UTC_TIMESTAMP(), UTC_TIMESTAMP(), "Frank Darabont", 142, 0, "The Matrix Revolutions", "Niki Matvin", STR_TO_DATE('10,9,1994','%d,%m,%Y'));
+INSERT INTO movies (create_time, update_time, director, duration_minutes, language, name, producer, release_date) values (UTC_TIMESTAMP(), UTC_TIMESTAMP(), "Client Eastwood", 133, 0, "Invictus", "Client Eastwood", STR_TO_DATE('11,12,2009','%d,%m,%Y'));
+INSERT INTO movies (create_time, update_time, director, duration_minutes, language, name, producer, release_date) values (UTC_TIMESTAMP(), UTC_TIMESTAMP(), "Tom Shadyac", 101, 0, "Bruce Almighty", "Tom Shadyac", STR_TO_DATE('14,5,2003','%d,%m,%Y'));
+INSERT INTO movies (create_time, update_time, director, duration_minutes, language, name, producer, release_date) values (UTC_TIMESTAMP(), UTC_TIMESTAMP(), "Peter Jackson", 178, 0, "Lord of the Rings (LOTR) The Fellowship of the Ring", "Peter Jackson", STR_TO_DATE('10,12,2001','%d,%m,%Y'));
+INSERT INTO movies (create_time, update_time, director, duration_minutes, language, name, producer, release_date) values (UTC_TIMESTAMP(), UTC_TIMESTAMP(), "Peter Jackson", 179, 0, "Lord of the Rings (LOTR) The Two Towers", "Peter Jackson", STR_TO_DATE('5,12,2002','%d,%m,%Y'));
+INSERT INTO movies (create_time, update_time, director, duration_minutes, language, name, producer, release_date) values (UTC_TIMESTAMP(), UTC_TIMESTAMP(), "Peter Jackson", 201, 0, "Lord of the Rings (LOTR) The Return of the King", "Peter Jackson", STR_TO_DATE('1,12,2003','%d,%m,%Y'));
+
+
+INSERT INTO cinemas (create_time, update_time, name, address, city) values (UTC_TIMESTAMP(), UTC_TIMESTAMP(), "PVR", "101 new Street", "Bangalore");
+INSERT INTO cinemas (create_time, update_time, name, address, city) values (UTC_TIMESTAMP(), UTC_TIMESTAMP(), "Harihar Talkies", "purane mandir ke saamne", "Bangalore");
+INSERT INTO cinemas (create_time, update_time, name, address, city) values (UTC_TIMESTAMP(), UTC_TIMESTAMP(), "Inox", "102 the other Street", "Bangalore");
+INSERT INTO cinemas (create_time, update_time, name, address, city) values (UTC_TIMESTAMP(), UTC_TIMESTAMP(), "PVR", "420 the fabulous Street", "Bangalore");
+INSERT INTO cinemas (create_time, update_time, name, address, city) values (UTC_TIMESTAMP(), UTC_TIMESTAMP(), "Carnival Cinema", "Adjacent to Inox Cinema", "Bangalore");
+INSERT INTO cinemas (create_time, update_time, name, address, city) values (UTC_TIMESTAMP(), UTC_TIMESTAMP(), "Big Cinema", "just before Small Cinema", "Bangalore");
+INSERT INTO cinemas (create_time, update_time, name, address, city) values (UTC_TIMESTAMP(), UTC_TIMESTAMP(), "Harihar Talkies", "103 bloody old Street", "Pune");
+INSERT INTO cinemas (create_time, update_time, name, address, city) values (UTC_TIMESTAMP(), UTC_TIMESTAMP(), "Harihar Talkies", "410 back passage road", "Mumbai");

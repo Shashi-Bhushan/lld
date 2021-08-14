@@ -4,9 +4,7 @@ import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 import java.util.Date;
 
 @MappedSuperclass
@@ -14,7 +12,8 @@ import java.util.Date;
 public abstract class BaseEntity {
     @Id
     @Column(name = "id")
-    private String id;
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private Long id;
 
     @CreationTimestamp
     @Column(name = "create_time")
@@ -27,12 +26,12 @@ public abstract class BaseEntity {
     public BaseEntity() {
     }
 
-    public String getId() {
+    public Long getId() {
 
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

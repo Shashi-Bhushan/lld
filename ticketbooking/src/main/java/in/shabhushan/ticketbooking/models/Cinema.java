@@ -1,6 +1,8 @@
 package in.shabhushan.ticketbooking.models;
 
+import in.shabhushan.ticketbooking.enums.City;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -9,12 +11,17 @@ import java.util.Set;
 @Entity
 @Table(name = "cinemas")
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class Cinema extends BaseEntity {
     @Column(name = "name")
     private String name;
 
     @Column(name = "address")
     private String address;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "city")
+    private City city;
 
     @OneToMany(
             mappedBy = "cinema",
