@@ -16,7 +16,6 @@ public class Show extends BaseEntity {
     @JoinColumn(name = "hall_id", nullable = false)
     private Hall hall;
 
-
     @OneToOne(
             mappedBy = "show",
             cascade = CascadeType.ALL,

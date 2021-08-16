@@ -1,5 +1,7 @@
 package in.shabhushan.ticketbooking.models;
 
+import in.shabhushan.ticketbooking.enums.SeatType;
+
 import javax.persistence.*;
 
 @Entity
@@ -7,10 +9,11 @@ import javax.persistence.*;
 public class Seat extends BaseEntity {
 
     @Column(name = "seat_location")
-    private String seatLocation;
+    private Integer seatLocation;
 
+    @Enumerated(EnumType.ORDINAL)
     @Column(name = "seat_type")
-    private String seatType;
+    private SeatType seatType;
 
     @Column(name = "is_undermaintainance")
     private boolean isUnderMaintainance;

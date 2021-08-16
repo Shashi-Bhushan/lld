@@ -5,11 +5,14 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "halls")
+@Table(
+        name = "halls",
+        uniqueConstraints = @UniqueConstraint(columnNames = {"hall_number", "cinema_id"})
+)
 public class Hall extends BaseEntity {
 
     @Column(name = "hall_number")
-    private String hallNumber;
+    private Integer hallNumber;
 
     @Column(name = "seat_count")
     private Integer seatCount;
