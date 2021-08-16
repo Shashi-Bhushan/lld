@@ -4,6 +4,7 @@ import in.shabhushan.ticketbooking.enums.Language;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -12,7 +13,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "movies")
-@Data @AllArgsConstructor
+@Data @AllArgsConstructor @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class Movie extends BaseEntity {
     @Column(name = "name")
