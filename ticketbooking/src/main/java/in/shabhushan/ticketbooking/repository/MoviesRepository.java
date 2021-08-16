@@ -1,6 +1,5 @@
 package in.shabhushan.ticketbooking.repository;
 
-import in.shabhushan.ticketbooking.enums.City;
 import in.shabhushan.ticketbooking.models.Movie;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
