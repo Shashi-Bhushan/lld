@@ -1,6 +1,7 @@
 package in.shabhushan.ticketbooking.models;
 
 import in.shabhushan.ticketbooking.enums.City;
+import in.shabhushan.ticketbooking.enums.State;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -8,20 +9,29 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity
-@Table(name = "cinemas")
 @Data
 @EqualsAndHashCode(callSuper = true)
+@Entity
+@Table(name = "cinemas")
+@SecondaryTable(
+        name = "addresses",
+        pkJoinColumns = @PrimaryKeyJoinColumn(name = "cinema_id", referencedColumnName = "id")
+)
 public class Cinema extends BaseEntity {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "address")
-    private String address;
+    @Column(name = "street", table = "addresses", columnDefinition = "varchar(50) not null")
+    private String street;
+
+    // This is not efficient, in prod like system, should use ordinal
+    @Enumerated(EnumType.STRING)
+    @Column(name = "city", table = "addresses")
+    private City city;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "city")
-    private City city;
+    @Column(name = "state", table = "addresses")
+    private State state;
 
     @OneToMany(
             mappedBy = "cinema",

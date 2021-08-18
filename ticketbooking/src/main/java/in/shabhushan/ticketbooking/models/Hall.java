@@ -17,14 +17,14 @@ public class Hall extends BaseEntity {
     @Column(name = "seat_count")
     private Integer seatCount;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cinema_id", nullable = false)
     private Cinema cinema;
 
     @OneToMany(
             mappedBy = "hall",
             cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER,
+            fetch = FetchType.LAZY,
             orphanRemoval = true
     )
     private Set<Seat> seats = new HashSet<>();
@@ -32,7 +32,7 @@ public class Hall extends BaseEntity {
     @OneToMany(
             mappedBy = "hall",
             cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER,
+            fetch = FetchType.LAZY,
             orphanRemoval = true
     )
     private Set<Show> shows = new HashSet<>();

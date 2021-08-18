@@ -22,8 +22,12 @@ public interface MoviesRepository extends JpaRepository<Movie, String>, JpaSpeci
 
     @Query(
             value =
-                    "select movies.* from cinemas INNER JOIN halls ON cinemas.id = halls.cinema_id INNER JOIN shows ON halls.id = shows.hall_id INNER JOIN movies ON movies.id = shows.movie_id " +
-                            "WHERE cinemas.city = :city AND movies.name =:movieName",
+                    "SELECT movies.* FROM cinemas " +
+                            "INNER JOIN halls ON cinemas.id = halls.cinema_id " +
+                            "INNER JOIN shows ON halls.id = shows.hall_id " +
+                            "INNER JOIN movies ON movies.id = shows.movie_id " +
+                            "INNER JOIN addresses ON cinemas.id = addresses.cinema_id " +
+                            "WHERE addresses.city = :city AND movies.name =:movieName",
             nativeQuery = true)
     List<Movie> getMoviesByCity(String city, String movieName);
 }

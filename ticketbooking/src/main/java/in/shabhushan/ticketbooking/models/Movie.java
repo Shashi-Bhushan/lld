@@ -38,7 +38,7 @@ public class Movie extends BaseEntity {
     @OneToMany(
             mappedBy = "movie",
             cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER,
+            fetch = FetchType.LAZY,
             orphanRemoval = true
     )
     private Set<Show> shows = new HashSet<>();
