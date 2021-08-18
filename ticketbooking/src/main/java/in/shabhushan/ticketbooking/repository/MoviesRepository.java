@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface MoviesRepository extends JpaRepository<Movie, String>, JpaSpecificationExecutor<Movie> {
+public interface MoviesRepository extends JpaRepository<Movie, Long>, JpaSpecificationExecutor<Movie> {
 
     //public List<Movie> findByCity(City city);
 
