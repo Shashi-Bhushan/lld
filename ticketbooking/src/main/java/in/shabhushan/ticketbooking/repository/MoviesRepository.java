@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface MoviesRepository extends JpaRepository<Movie, Long>, JpaSpecificationExecutor<Movie> {
 
-    //public List<Movie> findByCity(City city);
+    List<Movie> findByName(String name);
 
     @Query(
             value =

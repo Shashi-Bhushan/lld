@@ -1,4 +1,4 @@
-package in.shabhushan.ticketbooking.service;
+package in.shabhushan.ticketbooking.service.impl;
 
 public class BookingService {
     public boolean refundBooking() {

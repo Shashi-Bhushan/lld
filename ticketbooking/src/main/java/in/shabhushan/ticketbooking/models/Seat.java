@@ -3,6 +3,8 @@ package in.shabhushan.ticketbooking.models;
 import in.shabhushan.ticketbooking.enums.SeatType;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "seats")
@@ -22,11 +24,11 @@ public class Seat extends BaseEntity {
     @JoinColumn(name = "hall_id", nullable = false)
     private Hall hall;
 
-    @OneToOne(
+    @OneToMany(
             mappedBy = "seat",
             cascade = CascadeType.ALL,
             fetch = FetchType.EAGER,
             orphanRemoval = true
     )
-    private ShowSeat showSeat;
+    private Set<ShowSeat> showSeat = new HashSet<>();
 }

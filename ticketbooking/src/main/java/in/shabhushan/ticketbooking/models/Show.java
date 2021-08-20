@@ -2,6 +2,8 @@ package in.shabhushan.ticketbooking.models;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "shows")
@@ -16,15 +18,26 @@ public class Show extends BaseEntity {
     @JoinColumn(name = "hall_id", nullable = false)
     private Hall hall;
 
-    @OneToOne(
+    @Column(name = "cancelled")
+    private boolean cancelled;
+
+    @OneToMany(
             mappedBy = "show",
             cascade = CascadeType.ALL,
             fetch = FetchType.EAGER,
             orphanRemoval = true
     )
-    private ShowSeat showSeat;
+    private Set<ShowSeat> showSeat = new HashSet<>();
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @OneToMany(
+            mappedBy = "show",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER,
+            orphanRemoval = true
+    )
+    private Set<Booking> bookings = new HashSet<>();
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "movie_id", nullable = false)
     private Movie movie;
 }
