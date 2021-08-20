@@ -5,6 +5,7 @@ import in.shabhushan.ticketbooking.enums.State;
 import in.shabhushan.ticketbooking.models.BaseEntity;
 import in.shabhushan.ticketbooking.models.Booking;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.CascadeType;
@@ -20,7 +21,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Data
-@NoArgsConstructor
+@NoArgsConstructor @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "customers")
 public class Customer extends BaseEntity {
