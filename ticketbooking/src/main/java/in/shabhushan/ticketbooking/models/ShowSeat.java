@@ -27,7 +27,7 @@ public class ShowSeat extends BaseEntity {
     @OneToOne(
             mappedBy = "showSeat",
             cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER,
+            fetch = FetchType.LAZY,
             orphanRemoval = true
     )
     private Booking booking;

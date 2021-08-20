@@ -20,14 +20,14 @@ public class Seat extends BaseEntity {
     @Column(name = "is_undermaintainance")
     private boolean isUnderMaintainance;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "hall_id", nullable = false)
     private Hall hall;
 
     @OneToMany(
             mappedBy = "seat",
             cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER,
+            fetch = FetchType.LAZY,
             orphanRemoval = true
     )
     private Set<ShowSeat> showSeat = new HashSet<>();

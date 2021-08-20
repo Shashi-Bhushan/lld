@@ -37,7 +37,7 @@ public class Cinema extends BaseEntity {
             mappedBy = "cinema",
             // The mappedBy property is what we use to tell Hibernate which variable we are using to represent the parent class in our child class.
             cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER,
+            fetch = FetchType.LAZY,
             orphanRemoval = true
     )
     private Set<Hall> halls = new HashSet<>();

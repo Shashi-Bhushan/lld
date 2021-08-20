@@ -1,7 +1,9 @@
 package in.shabhushan.ticketbooking.models;
 
 import in.shabhushan.ticketbooking.enums.BookingStatus;
-import in.shabhushan.ticketbooking.models.users.User;
+import in.shabhushan.ticketbooking.models.users.Customer;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,12 +15,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+@Data
+@NoArgsConstructor
 @Entity
 @Table(name = "bookings")
 public class Booking extends BaseEntity {
-    @OneToOne
-    @JoinColumn(name = "user")
-    private User user;
+    @ManyToOne
+    @JoinColumn(name = "customer_id", nullable = false)
+    private Customer customer;
 
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "status")

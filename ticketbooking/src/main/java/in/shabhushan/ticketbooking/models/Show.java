@@ -14,7 +14,7 @@ public class Show extends BaseEntity {
     @Column(name = "end_time")
     private Date endTime;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "hall_id", nullable = false)
     private Hall hall;
 
@@ -24,7 +24,7 @@ public class Show extends BaseEntity {
     @OneToMany(
             mappedBy = "show",
             cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER,
+            fetch = FetchType.LAZY,
             orphanRemoval = true
     )
     private Set<ShowSeat> showSeat = new HashSet<>();
@@ -32,7 +32,7 @@ public class Show extends BaseEntity {
     @OneToMany(
             mappedBy = "show",
             cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER,
+            fetch = FetchType.LAZY,
             orphanRemoval = true
     )
     private Set<Booking> bookings = new HashSet<>();
