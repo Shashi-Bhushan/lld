@@ -1,6 +1,7 @@
 package in.shabhushan.ticketbooking.models;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -17,6 +18,7 @@ public abstract class BaseEntity {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @EqualsAndHashCode.Include
     private Long id;
 
     @CreationTimestamp
@@ -27,8 +29,7 @@ public abstract class BaseEntity {
     @Column(name = "update_time")
     private Date updateTime;
 
-    public BaseEntity() {
-    }
+    protected BaseEntity() {}
 
     public Long getId() {
 

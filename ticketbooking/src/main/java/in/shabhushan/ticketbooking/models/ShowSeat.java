@@ -1,26 +1,28 @@
 package in.shabhushan.ticketbooking.models;
 
+import in.shabhushan.ticketbooking.enums.ShowSeatStatus;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Data
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "show_seats")
 public class ShowSeat extends BaseEntity {
+    @Enumerated(EnumType.ORDINAL)
     @Column(name = "seat_status")
-    private String seatStatus;
+    private ShowSeatStatus seatStatus;
 
     @Column(name = "price")
     private Integer price;
@@ -33,14 +35,7 @@ public class ShowSeat extends BaseEntity {
     @JoinColumn(name = "show_id", nullable = false, unique = true)
     private Show show;
 
-    @Column(name = "occupied")
-    private boolean occupied;
-
-    @OneToMany(
-            mappedBy = "seat",
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY,
-            orphanRemoval = true
-    )
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "booking_id", nullable = true)
     private Booking booking;
 }

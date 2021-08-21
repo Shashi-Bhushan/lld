@@ -1,5 +1,8 @@
 package in.shabhushan.ticketbooking.models;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -17,7 +20,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Data
-@EqualsAndHashCode(callSuper = true) @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true, exclude = {"movie"}) @NoArgsConstructor
 @Entity
 @Table(name = "shows")
 public class Show extends BaseEntity {
@@ -31,8 +34,8 @@ public class Show extends BaseEntity {
     @JoinColumn(name = "hall_id", nullable = false)
     private Hall hall;
 
-    @Column(name = "cancelled")
-    private boolean cancelled;
+    @Column(name = "cancelled", columnDefinition = "bit(1) default 0")
+    private Boolean cancelled;
 
     @OneToMany(
             mappedBy = "show",

@@ -21,7 +21,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Data
-@NoArgsConstructor @EqualsAndHashCode(callSuper = true)
+@NoArgsConstructor @EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "customers")
 public class Customer extends BaseEntity {

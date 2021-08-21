@@ -2,6 +2,7 @@ package in.shabhushan.ticketbooking.service.impl;
 
 import in.shabhushan.ticketbooking.dto.BookingRequestDTO;
 import in.shabhushan.ticketbooking.enums.BookingStatus;
+import in.shabhushan.ticketbooking.enums.ShowSeatStatus;
 import in.shabhushan.ticketbooking.exceptions.bookings.exp.BookingDoesNotExistException;
 import in.shabhushan.ticketbooking.exceptions.bookings.exp.InvalidBookingStateException;
 import in.shabhushan.ticketbooking.exceptions.bookings.exp.SeatNotAvailableException;
@@ -38,12 +39,12 @@ public class BookingServiceImpl implements BookingService {
             throw new SeatNotAvailableException("The show is not accepting bookings anymore.");
         }
 
-        if (bookingRequest.getShowSeats().stream().anyMatch(ShowSeat::isOccupied)) {
+        if (bookingRequest.getShowSeats().stream().anyMatch(showSeat -> showSeat.getSeatStatus().equals(ShowSeatStatus.OCCUPIED))) {
             throw new SeatNotAvailableException("Some of the seats are not available for booking anymore.");
         }
 
         bookingRequest.getShowSeats().forEach(showSeat -> {
-            showSeat.setOccupied(true);
+            showSeat.setSeatStatus(ShowSeatStatus.OCCUPIED);
             showSeatsRepository.save(showSeat);
         });
 
@@ -68,7 +69,7 @@ public class BookingServiceImpl implements BookingService {
         refundService.refundBooking(booking);
 
         booking.getShowSeats().forEach(showSeat -> {
-            showSeat.setOccupied(false);
+            showSeat.setSeatStatus(ShowSeatStatus.VACANT);
             showSeatsRepository.save(showSeat);
         });
 

@@ -1,10 +1,13 @@
 package in.shabhushan.ticketbooking.models;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import in.shabhushan.ticketbooking.enums.Language;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -21,8 +24,9 @@ import java.util.Set;
 @Entity
 @Table(name = "movies")
 @Data @AllArgsConstructor @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
 public class Movie extends BaseEntity {
+    @NaturalId
     @Column(name = "name")
     private String name;
 
