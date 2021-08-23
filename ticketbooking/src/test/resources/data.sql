@@ -1,3 +1,6 @@
+INSERT INTO users (create_time, update_time, username, password) values (UTC_TIMESTAMP(), UTC_TIMESTAMP(), "shashi", "superSecret");
+INSERT INTO customers (create_time, update_time, city, email, first_name, last_name, phone_number, state, user_id) values (UTC_TIMESTAMP(), UTC_TIMESTAMP(), 1, "email@domain.com", "Shashi", "Bhushan", "12345", 1, 1);
+
 INSERT INTO movies (create_time, update_time, director, duration_minutes, language, name, producer, release_date) values (UTC_TIMESTAMP(), UTC_TIMESTAMP(), "Terence Fisher", 87, 0, "The Hound of Baskervilles", "Anthony Hinds", STR_TO_DATE('4,5,1959','%d,%m,%Y'));
 INSERT INTO movies (create_time, update_time, director, duration_minutes, language, name, producer, release_date) values (UTC_TIMESTAMP(), UTC_TIMESTAMP(), "The Wachowskis", 136, 0, "The Matrix", "Joel Silver", STR_TO_DATE('24,3,1999','%d,%m,%Y'));
 INSERT INTO movies (create_time, update_time, director, duration_minutes, language, name, producer, release_date) values (UTC_TIMESTAMP(), UTC_TIMESTAMP(), "The Wachowskis", 138, 0, "The Matrix Reloaded", "Joel Silver", STR_TO_DATE('15,5,2003','%d,%m,%Y'));

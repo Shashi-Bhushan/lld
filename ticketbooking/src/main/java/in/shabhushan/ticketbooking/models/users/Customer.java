@@ -7,6 +7,7 @@ import in.shabhushan.ticketbooking.models.Booking;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -45,6 +46,7 @@ public class Customer extends BaseEntity {
     @Column(name = "email")
     private String email;
 
+    @ToString.Exclude
     @OneToMany(
             mappedBy = "customer",
             cascade = CascadeType.ALL,

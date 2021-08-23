@@ -1,11 +1,9 @@
 package in.shabhushan.ticketbooking.models;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -37,6 +35,7 @@ public class Show extends BaseEntity {
     @Column(name = "cancelled", columnDefinition = "bit(1) default 0")
     private Boolean cancelled;
 
+    @ToString.Exclude
     @OneToMany(
             mappedBy = "show",
             cascade = CascadeType.ALL,
@@ -45,6 +44,7 @@ public class Show extends BaseEntity {
     )
     private Set<ShowSeat> showSeat = new HashSet<>();
 
+    @ToString.Exclude
     @OneToMany(
             mappedBy = "show",
             cascade = CascadeType.ALL,

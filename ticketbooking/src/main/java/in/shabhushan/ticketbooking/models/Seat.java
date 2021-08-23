@@ -1,6 +1,7 @@
 package in.shabhushan.ticketbooking.models;
 
 import in.shabhushan.ticketbooking.enums.SeatType;
+import lombok.ToString;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -33,6 +34,7 @@ public class Seat extends BaseEntity {
     @JoinColumn(name = "hall_id", nullable = false)
     private Hall hall;
 
+    @ToString.Exclude
     @OneToMany(
             mappedBy = "seat",
             cascade = CascadeType.ALL,

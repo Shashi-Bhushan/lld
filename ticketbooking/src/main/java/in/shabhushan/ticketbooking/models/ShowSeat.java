@@ -13,12 +13,13 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
 @Entity
-@Table(name = "show_seats")
+@Table(name = "show_seats", uniqueConstraints = { @UniqueConstraint(columnNames = {"show_id", "seat_id"})} )
 public class ShowSeat extends BaseEntity {
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "seat_status")
@@ -32,7 +33,7 @@ public class ShowSeat extends BaseEntity {
     private Seat seat;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "show_id", nullable = false, unique = true)
+    @JoinColumn(name = "show_id", nullable = false)
     private Show show;
 
     @ManyToOne(fetch = FetchType.LAZY)

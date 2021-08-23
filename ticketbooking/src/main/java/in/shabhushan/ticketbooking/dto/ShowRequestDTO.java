@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NonNull;
 
 @Data
-public class MovieRequestDTO {
+public class ShowRequestDTO {
     @NonNull
     private String movieName;
 

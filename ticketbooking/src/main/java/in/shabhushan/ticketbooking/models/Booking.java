@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Singular;
+import lombok.ToString;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -38,6 +39,7 @@ public class Booking extends BaseEntity {
     @Column(name = "status")
     private BookingStatus status;
 
+    @ToString.Exclude
     @OneToMany(
             mappedBy = "booking",
             cascade = CascadeType.ALL,

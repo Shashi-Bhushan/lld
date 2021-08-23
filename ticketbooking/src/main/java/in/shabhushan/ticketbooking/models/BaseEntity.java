@@ -14,6 +14,7 @@ import java.util.Date;
 
 @MappedSuperclass
 @Data
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public abstract class BaseEntity {
     @Id
     @Column(name = "id")
@@ -22,11 +23,11 @@ public abstract class BaseEntity {
     private Long id;
 
     @CreationTimestamp
-    @Column(name = "create_time")
+    @Column(name = "create_time", nullable = false, updatable = false)
     private Date createTime;
 
     @UpdateTimestamp
-    @Column(name = "update_time")
+    @Column(name = "update_time", nullable = false)
     private Date updateTime;
 
     protected BaseEntity() {}

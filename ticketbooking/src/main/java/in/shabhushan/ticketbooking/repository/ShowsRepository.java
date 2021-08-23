@@ -16,4 +16,16 @@ public interface ShowsRepository extends JpaRepository<Show, Long>, JpaSpecifica
             nativeQuery = true
     )
     List<Show> getShowByMovieAndHall(Long movie, Long hall);
+
+    @Query(
+            value =
+                    "SELECT shows.* FROM shows " +
+                            "INNER JOIN movies ON movies.id = shows.movie_id " +
+                            "INNER JOIN halls ON halls.id = shows.hall_id " +
+                            "INNER JOIN cinemas ON cinemas.id = halls.cinema_id " +
+                            "INNER JOIN addresses ON cinemas.id = addresses.cinema_id " +
+                            "WHERE addresses.city = :city AND movies.name =:movieName",
+            nativeQuery = true
+    )
+    List<Show> getShowByMovieAndCity(String city, String movieName);
 }

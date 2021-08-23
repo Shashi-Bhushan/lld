@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.CascadeType;
@@ -46,6 +47,7 @@ public class Movie extends BaseEntity {
     @Column(name = "language")
     private Language language;
 
+    @ToString.Exclude
     @OneToMany(
             mappedBy = "movie",
             cascade = CascadeType.ALL,

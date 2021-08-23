@@ -1,5 +1,7 @@
 package in.shabhushan.ticketbooking.models;
 
+import lombok.ToString;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -29,6 +31,7 @@ public class Hall extends BaseEntity {
     @JoinColumn(name = "cinema_id", nullable = false)
     private Cinema cinema;
 
+    @ToString.Exclude
     @OneToMany(
             mappedBy = "hall",
             cascade = CascadeType.ALL,
@@ -37,6 +40,7 @@ public class Hall extends BaseEntity {
     )
     private Set<Seat> seats = new HashSet<>();
 
+    @ToString.Exclude
     @OneToMany(
             mappedBy = "hall",
             cascade = CascadeType.ALL,
