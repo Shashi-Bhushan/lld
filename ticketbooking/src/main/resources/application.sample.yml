@@ -22,3 +22,24 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: validate
+
+management:
+  metrics:
+    export:
+      influx:
+        enabled: true
+        db: ticket_booking
+        uri: http://<host>:<port>
+        user-name: <user>
+        password: <password>
+        step: 1m
+  endpoints:
+    web:
+      expose: "*"
+
+com:
+  ticketbooking:
+    shows:
+      cache:
+        size: 10
+        durationSeconds: 30
