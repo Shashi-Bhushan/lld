@@ -5,6 +5,7 @@ import in.shabhushan.ticketbooking.dto.ShowRequestDTO;
 import in.shabhushan.ticketbooking.models.Show;
 import in.shabhushan.ticketbooking.service.api.ShowsService;
 import in.shabhushan.ticketbooking.util.ShowsCache;
+import io.micrometer.core.annotation.Timed;
 import io.micrometer.core.instrument.Counter;
 import io.micrometer.core.instrument.Metrics;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +29,16 @@ public class ShowsControllerImpl implements ShowsController {
 
     private final ShowsCache showsCache = ShowsCache.instance(showsService, showsCacheSize, showsCacheDuration);
 
+    private static final Counter requestCounter = Counter.builder("requests.shows.metrics")
+            .tag("ApiType", "GetbyCity")
+            .description("API count")
+            .register(Metrics.globalRegistry);
+
     @Override
+    @Timed
     public List<Show> getShowsByCity(ShowRequestDTO movieRequest) {
         increaseCount(movieRequest.getCity().name(), movieRequest.getMovieName());
+
         try {
             return showsCache.getShows(movieRequest);
         } catch (ExecutionException e) {
@@ -41,7 +49,6 @@ public class ShowsControllerImpl implements ShowsController {
 
     private void increaseCount(String city, String movie) {
         // Counter class stores the measurement name and the tags and their values
-        Counter counter = Metrics.counter("request.orders",  "city", city, "movie", movie);
-        counter.increment();
+        requestCounter.increment();
     }
 }

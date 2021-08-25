@@ -2,6 +2,7 @@ package in.shabhushan.ticketbooking;
 
 import in.shabhushan.ticketbooking.service.api.ShowsService;
 import in.shabhushan.ticketbooking.util.ShowsCache;
+import io.micrometer.core.instrument.composite.CompositeMeterRegistry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;

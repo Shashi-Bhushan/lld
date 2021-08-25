@@ -3,6 +3,7 @@ logging:
   level:
     in.shabhushan: 'DEBUG'
     org.springframework: 'WARN'
+    ROOT: 'DEBUG'
 
 server:
   port: ${random.int(15000,15100)}
@@ -32,7 +33,7 @@ management:
         uri: http://<host>:<port>
         user-name: <user>
         password: <password>
-        step: 1m
+        step: 1m # interval at which data is exported to db
   endpoints:
     web:
       expose: "*"

@@ -1,0 +1,261 @@
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v2.5.3)
+
+2021-08-25 23:38:06.202  INFO 5035 --- [           main] i.s.t.TicketBookingApplication           : Starting TicketBookingApplication using Java 11.0.10 on Shashis-MacBook-Pro.local with PID 5035 (/Users/shashi/projects/personal/lld/ticketbooking/target/classes started by shashi in /Users/shashi/projects/personal/lld/ticketbooking)
+2021-08-25 23:38:06.203 DEBUG 5035 --- [           main] i.s.t.TicketBookingApplication           : Running with Spring Boot v2.5.3, Spring v5.3.9
+2021-08-25 23:38:06.203  INFO 5035 --- [           main] i.s.t.TicketBookingApplication           : No active profile set, falling back to default profiles: default
+2021-08-25 23:38:06.710  INFO 5035 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-08-25 23:38:06.760  INFO 5035 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 44 ms. Found 8 JPA repository interfaces.
+2021-08-25 23:38:07.150  INFO 5035 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2021-08-25 23:38:07.157  INFO 5035 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-08-25 23:38:07.157  INFO 5035 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.50]
+2021-08-25 23:38:07.205  INFO 5035 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-08-25 23:38:07.205  INFO 5035 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 969 ms
+2021-08-25 23:38:07.229  INFO 5035 --- [           main] i.m.c.instrument.push.PushMeterRegistry  : publishing metrics for InfluxMeterRegistry every 30s
+2021-08-25 23:38:07.230  INFO 5035 --- [           main] i.micrometer.influx.InfluxMeterRegistry  : Using InfluxDB API version V1 to write metrics
+2021-08-25 23:38:07.370  INFO 5035 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-08-25 23:38:07.400  INFO 5035 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.32.Final
+2021-08-25 23:38:07.489  INFO 5035 --- [           main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-08-25 23:38:07.545  INFO 5035 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-08-25 23:38:07.847  INFO 5035 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-08-25 23:38:07.862  INFO 5035 --- [           main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+Hibernate: alter table addresses drop foreign key FK475jluxfl9xkuml9ogv1kvmna
+Hibernate: alter table admins drop foreign key FKgc8dtql9mkq268detxiox7fpm
+Hibernate: alter table bookings drop foreign key FKbvfibgflhsb0g2hnjauiv5khs
+Hibernate: alter table bookings drop foreign key FK5f9847fuaqx7qe2xug4e5pky1
+Hibernate: alter table customers drop foreign key FKrh1g1a20omjmn6kurd35o3eit
+Hibernate: alter table halls drop foreign key FKpst04yq0t1iyprvitond7ly34
+Hibernate: alter table seats drop foreign key FK3jtfe0f60bcpbavj4mctjeasw
+Hibernate: alter table show_seats drop foreign key FK8xn57t3sajoka5xvnk6mkwbsr
+Hibernate: alter table show_seats drop foreign key FKrv3vjiyngf73knixxu2d4ac0d
+Hibernate: alter table show_seats drop foreign key FKldtrq74q8syptlbgqag9cw9w1
+Hibernate: alter table shows drop foreign key FK1qa9jl0gpbx6070ugpi5l6653
+Hibernate: alter table shows drop foreign key FKqdpwhiv5r3lx844pct0eudapk
+Hibernate: alter table users_roles drop foreign key FKa62j07k5mhgifpp955h37ponj
+2021-08-25 23:38:09.589  WARN 5035 --- [           main] o.h.t.s.i.ExceptionHandlerLoggedImpl     : GenerationTarget encountered exception accepting command : Error executing DDL "alter table users_roles drop foreign key FKa62j07k5mhgifpp955h37ponj" via JDBC Statement
+
+org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "alter table users_roles drop foreign key FKa62j07k5mhgifpp955h37ponj" via JDBC Statement
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:67) ~[hibernate-core-5.4.32.Final.jar:5.4.32.Final]
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.applySqlString(SchemaDropperImpl.java:375) ~[hibernate-core-5.4.32.Final.jar:5.4.32.Final]
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.applySqlStrings(SchemaDropperImpl.java:359) ~[hibernate-core-5.4.32.Final.jar:5.4.32.Final]
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.applyConstraintDropping(SchemaDropperImpl.java:331) ~[hibernate-core-5.4.32.Final.jar:5.4.32.Final]
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.dropFromMetadata(SchemaDropperImpl.java:230) ~[hibernate-core-5.4.32.Final.jar:5.4.32.Final]
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.performDrop(SchemaDropperImpl.java:154) ~[hibernate-core-5.4.32.Final.jar:5.4.32.Final]
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.doDrop(SchemaDropperImpl.java:126) ~[hibernate-core-5.4.32.Final.jar:5.4.32.Final]
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.doDrop(SchemaDropperImpl.java:112) ~[hibernate-core-5.4.32.Final.jar:5.4.32.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:145) ~[hibernate-core-5.4.32.Final.jar:5.4.32.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:73) ~[hibernate-core-5.4.32.Final.jar:5.4.32.Final]
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:318) ~[hibernate-core-5.4.32.Final.jar:5.4.32.Final]
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:468) ~[hibernate-core-5.4.32.Final.jar:5.4.32.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1259) ~[hibernate-core-5.4.32.Final.jar:5.4.32.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:58) ~[spring-orm-5.3.9.jar:5.3.9]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365) ~[spring-orm-5.3.9.jar:5.3.9]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409) ~[spring-orm-5.3.9.jar:5.3.9]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396) ~[spring-orm-5.3.9.jar:5.3.9]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341) ~[spring-orm-5.3.9.jar:5.3.9]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1845) ~[spring-beans-5.3.9.jar:5.3.9]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1782) ~[spring-beans-5.3.9.jar:5.3.9]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:602) ~[spring-beans-5.3.9.jar:5.3.9]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:524) ~[spring-beans-5.3.9.jar:5.3.9]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.9.jar:5.3.9]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.9.jar:5.3.9]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.9.jar:5.3.9]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.9.jar:5.3.9]
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1154) ~[spring-context-5.3.9.jar:5.3.9]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:908) ~[spring-context-5.3.9.jar:5.3.9]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583) ~[spring-context-5.3.9.jar:5.3.9]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:145) ~[spring-boot-2.5.3.jar:2.5.3]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754) ~[spring-boot-2.5.3.jar:2.5.3]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:434) ~[spring-boot-2.5.3.jar:2.5.3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:338) ~[spring-boot-2.5.3.jar:2.5.3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343) ~[spring-boot-2.5.3.jar:2.5.3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1332) ~[spring-boot-2.5.3.jar:2.5.3]
+	at in.shabhushan.ticketbooking.TicketBookingApplication.main(TicketBookingApplication.java:26) ~[classes/:na]
+Caused by: java.sql.SQLSyntaxErrorException: Can't DROP 'FKa62j07k5mhgifpp955h37ponj'; check that column/key exists
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:764) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:648) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:94) ~[HikariCP-4.0.3.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java) ~[HikariCP-4.0.3.jar:na]
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54) ~[hibernate-core-5.4.32.Final.jar:5.4.32.Final]
+	... 35 common frames omitted
+
+Hibernate: alter table users_roles drop foreign key FK2o0jvgh89lemvvo17cbqvdxaa
+Hibernate: drop table if exists addresses
+Hibernate: drop table if exists admins
+Hibernate: drop table if exists bookings
+Hibernate: drop table if exists cinemas
+Hibernate: drop table if exists customers
+Hibernate: drop table if exists halls
+Hibernate: drop table if exists movies
+Hibernate: drop table if exists roles
+Hibernate: drop table if exists seats
+Hibernate: drop table if exists show_seats
+Hibernate: drop table if exists shows
+Hibernate: drop table if exists users
+Hibernate: drop table if exists users_roles
+Hibernate: create table addresses (city varchar(255), state varchar(255), street varchar(50) not null, cinema_id bigint not null, primary key (cinema_id)) engine=InnoDB
+Hibernate: create table admins (id bigint not null auto_increment, create_time datetime(6) not null, update_time datetime(6) not null, designation varchar(255), phone_number varchar(255), years_in_company bigint, user_id bigint, primary key (id)) engine=InnoDB
+Hibernate: create table bookings (id bigint not null auto_increment, create_time datetime(6) not null, update_time datetime(6) not null, status integer, customer_id bigint not null, show_id bigint not null, primary key (id)) engine=InnoDB
+Hibernate: create table cinemas (id bigint not null auto_increment, create_time datetime(6) not null, update_time datetime(6) not null, name varchar(255), primary key (id)) engine=InnoDB
+Hibernate: create table customers (id bigint not null auto_increment, create_time datetime(6) not null, update_time datetime(6) not null, city integer, email varchar(255), first_name varchar(255), last_name varchar(255), phone_number varchar(255), state integer, user_id bigint, primary key (id)) engine=InnoDB
+Hibernate: create table halls (id bigint not null auto_increment, create_time datetime(6) not null, update_time datetime(6) not null, hall_number integer, seat_count integer, cinema_id bigint not null, primary key (id)) engine=InnoDB
+Hibernate: create table movies (id bigint not null auto_increment, create_time datetime(6) not null, update_time datetime(6) not null, director varchar(255), duration_minutes integer, language integer, name varchar(255), producer varchar(255), release_date datetime(6), primary key (id)) engine=InnoDB
+Hibernate: create table roles (id bigint not null auto_increment, create_time datetime(6) not null, update_time datetime(6) not null, desc varchar(255), name varchar(255), primary key (id)) engine=InnoDB
+2021-08-25 23:38:11.500  WARN 5035 --- [           main] o.h.t.s.i.ExceptionHandlerLoggedImpl     : GenerationTarget encountered exception accepting command : Error executing DDL "create table roles (id bigint not null auto_increment, create_time datetime(6) not null, update_time datetime(6) not null, desc varchar(255), name varchar(255), primary key (id)) engine=InnoDB" via JDBC Statement
+
+org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "create table roles (id bigint not null auto_increment, create_time datetime(6) not null, update_time datetime(6) not null, desc varchar(255), name varchar(255), primary key (id)) engine=InnoDB" via JDBC Statement
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:67) ~[hibernate-core-5.4.32.Final.jar:5.4.32.Final]
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.applySqlString(SchemaCreatorImpl.java:439) ~[hibernate-core-5.4.32.Final.jar:5.4.32.Final]
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.applySqlStrings(SchemaCreatorImpl.java:423) ~[hibernate-core-5.4.32.Final.jar:5.4.32.Final]
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.createFromMetadata(SchemaCreatorImpl.java:314) ~[hibernate-core-5.4.32.Final.jar:5.4.32.Final]
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.performCreation(SchemaCreatorImpl.java:166) ~[hibernate-core-5.4.32.Final.jar:5.4.32.Final]
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.doCreation(SchemaCreatorImpl.java:135) ~[hibernate-core-5.4.32.Final.jar:5.4.32.Final]
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.doCreation(SchemaCreatorImpl.java:121) ~[hibernate-core-5.4.32.Final.jar:5.4.32.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:156) ~[hibernate-core-5.4.32.Final.jar:5.4.32.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:73) ~[hibernate-core-5.4.32.Final.jar:5.4.32.Final]
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:318) ~[hibernate-core-5.4.32.Final.jar:5.4.32.Final]
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:468) ~[hibernate-core-5.4.32.Final.jar:5.4.32.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1259) ~[hibernate-core-5.4.32.Final.jar:5.4.32.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:58) ~[spring-orm-5.3.9.jar:5.3.9]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365) ~[spring-orm-5.3.9.jar:5.3.9]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409) ~[spring-orm-5.3.9.jar:5.3.9]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396) ~[spring-orm-5.3.9.jar:5.3.9]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341) ~[spring-orm-5.3.9.jar:5.3.9]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1845) ~[spring-beans-5.3.9.jar:5.3.9]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1782) ~[spring-beans-5.3.9.jar:5.3.9]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:602) ~[spring-beans-5.3.9.jar:5.3.9]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:524) ~[spring-beans-5.3.9.jar:5.3.9]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.9.jar:5.3.9]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.9.jar:5.3.9]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.9.jar:5.3.9]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.9.jar:5.3.9]
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1154) ~[spring-context-5.3.9.jar:5.3.9]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:908) ~[spring-context-5.3.9.jar:5.3.9]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583) ~[spring-context-5.3.9.jar:5.3.9]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:145) ~[spring-boot-2.5.3.jar:2.5.3]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754) ~[spring-boot-2.5.3.jar:2.5.3]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:434) ~[spring-boot-2.5.3.jar:2.5.3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:338) ~[spring-boot-2.5.3.jar:2.5.3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343) ~[spring-boot-2.5.3.jar:2.5.3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1332) ~[spring-boot-2.5.3.jar:2.5.3]
+	at in.shabhushan.ticketbooking.TicketBookingApplication.main(TicketBookingApplication.java:26) ~[classes/:na]
+Caused by: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'desc varchar(255), name varchar(255), primary key (id)) engine=InnoDB' at line 1
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:764) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:648) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:94) ~[HikariCP-4.0.3.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java) ~[HikariCP-4.0.3.jar:na]
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54) ~[hibernate-core-5.4.32.Final.jar:5.4.32.Final]
+	... 34 common frames omitted
+
+Hibernate: create table seats (id bigint not null auto_increment, create_time datetime(6) not null, update_time datetime(6) not null, is_undermaintainance bit, seat_location integer, seat_type integer, hall_id bigint not null, primary key (id)) engine=InnoDB
+Hibernate: create table show_seats (id bigint not null auto_increment, create_time datetime(6) not null, update_time datetime(6) not null, price integer, seat_status integer, booking_id bigint, seat_id bigint not null, show_id bigint not null, primary key (id)) engine=InnoDB
+Hibernate: create table shows (id bigint not null auto_increment, create_time datetime(6) not null, update_time datetime(6) not null, cancelled bit(1) default 0, end_time datetime(6), start_time datetime(6), hall_id bigint not null, movie_id bigint not null, primary key (id)) engine=InnoDB
+Hibernate: create table users (id bigint not null auto_increment, create_time datetime(6) not null, update_time datetime(6) not null, password varchar(255), username varchar(255), primary key (id)) engine=InnoDB
+Hibernate: create table users_roles (user_id bigint not null, roles_id bigint not null, primary key (user_id, roles_id)) engine=InnoDB
+Hibernate: alter table halls add constraint UKf6j6i5a2nkahfwjbiyyj3lwk4 unique (hall_number, cinema_id)
+Hibernate: alter table movies add constraint UK_o5096m520r5rjaq5u3if5g3cy unique (name)
+Hibernate: alter table show_seats add constraint UK7an1nntm77pbvdk5cmjbve9yt unique (show_id, seat_id)
+Hibernate: alter table addresses add constraint FK475jluxfl9xkuml9ogv1kvmna foreign key (cinema_id) references cinemas (id)
+Hibernate: alter table admins add constraint FKgc8dtql9mkq268detxiox7fpm foreign key (user_id) references users (id)
+Hibernate: alter table bookings add constraint FKbvfibgflhsb0g2hnjauiv5khs foreign key (customer_id) references customers (id)
+Hibernate: alter table bookings add constraint FK5f9847fuaqx7qe2xug4e5pky1 foreign key (show_id) references shows (id)
+Hibernate: alter table customers add constraint FKrh1g1a20omjmn6kurd35o3eit foreign key (user_id) references users (id)
+Hibernate: alter table halls add constraint FKpst04yq0t1iyprvitond7ly34 foreign key (cinema_id) references cinemas (id)
+Hibernate: alter table seats add constraint FK3jtfe0f60bcpbavj4mctjeasw foreign key (hall_id) references halls (id)
+Hibernate: alter table show_seats add constraint FK8xn57t3sajoka5xvnk6mkwbsr foreign key (booking_id) references bookings (id)
+Hibernate: alter table show_seats add constraint FKrv3vjiyngf73knixxu2d4ac0d foreign key (seat_id) references seats (id)
+Hibernate: alter table show_seats add constraint FKldtrq74q8syptlbgqag9cw9w1 foreign key (show_id) references shows (id)
+Hibernate: alter table shows add constraint FK1qa9jl0gpbx6070ugpi5l6653 foreign key (hall_id) references halls (id)
+Hibernate: alter table shows add constraint FKqdpwhiv5r3lx844pct0eudapk foreign key (movie_id) references movies (id)
+Hibernate: alter table users_roles add constraint FKa62j07k5mhgifpp955h37ponj foreign key (roles_id) references roles (id)
+2021-08-25 23:38:17.221  WARN 5035 --- [           main] o.h.t.s.i.ExceptionHandlerLoggedImpl     : GenerationTarget encountered exception accepting command : Error executing DDL "alter table users_roles add constraint FKa62j07k5mhgifpp955h37ponj foreign key (roles_id) references roles (id)" via JDBC Statement
+
+org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "alter table users_roles add constraint FKa62j07k5mhgifpp955h37ponj foreign key (roles_id) references roles (id)" via JDBC Statement
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:67) ~[hibernate-core-5.4.32.Final.jar:5.4.32.Final]
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.applySqlString(SchemaCreatorImpl.java:439) ~[hibernate-core-5.4.32.Final.jar:5.4.32.Final]
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.applySqlStrings(SchemaCreatorImpl.java:423) ~[hibernate-core-5.4.32.Final.jar:5.4.32.Final]
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.createFromMetadata(SchemaCreatorImpl.java:374) ~[hibernate-core-5.4.32.Final.jar:5.4.32.Final]
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.performCreation(SchemaCreatorImpl.java:166) ~[hibernate-core-5.4.32.Final.jar:5.4.32.Final]
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.doCreation(SchemaCreatorImpl.java:135) ~[hibernate-core-5.4.32.Final.jar:5.4.32.Final]
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.doCreation(SchemaCreatorImpl.java:121) ~[hibernate-core-5.4.32.Final.jar:5.4.32.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:156) ~[hibernate-core-5.4.32.Final.jar:5.4.32.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:73) ~[hibernate-core-5.4.32.Final.jar:5.4.32.Final]
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:318) ~[hibernate-core-5.4.32.Final.jar:5.4.32.Final]
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:468) ~[hibernate-core-5.4.32.Final.jar:5.4.32.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1259) ~[hibernate-core-5.4.32.Final.jar:5.4.32.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:58) ~[spring-orm-5.3.9.jar:5.3.9]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365) ~[spring-orm-5.3.9.jar:5.3.9]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409) ~[spring-orm-5.3.9.jar:5.3.9]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396) ~[spring-orm-5.3.9.jar:5.3.9]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341) ~[spring-orm-5.3.9.jar:5.3.9]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1845) ~[spring-beans-5.3.9.jar:5.3.9]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1782) ~[spring-beans-5.3.9.jar:5.3.9]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:602) ~[spring-beans-5.3.9.jar:5.3.9]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:524) ~[spring-beans-5.3.9.jar:5.3.9]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.9.jar:5.3.9]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.9.jar:5.3.9]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.9.jar:5.3.9]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.9.jar:5.3.9]
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1154) ~[spring-context-5.3.9.jar:5.3.9]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:908) ~[spring-context-5.3.9.jar:5.3.9]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583) ~[spring-context-5.3.9.jar:5.3.9]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:145) ~[spring-boot-2.5.3.jar:2.5.3]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754) ~[spring-boot-2.5.3.jar:2.5.3]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:434) ~[spring-boot-2.5.3.jar:2.5.3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:338) ~[spring-boot-2.5.3.jar:2.5.3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343) ~[spring-boot-2.5.3.jar:2.5.3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1332) ~[spring-boot-2.5.3.jar:2.5.3]
+	at in.shabhushan.ticketbooking.TicketBookingApplication.main(TicketBookingApplication.java:26) ~[classes/:na]
+Caused by: java.sql.SQLException: Failed to open the referenced table 'roles'
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:129) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:764) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:648) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:94) ~[HikariCP-4.0.3.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java) ~[HikariCP-4.0.3.jar:na]
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54) ~[hibernate-core-5.4.32.Final.jar:5.4.32.Final]
+	... 34 common frames omitted
+
+Hibernate: alter table users_roles add constraint FK2o0jvgh89lemvvo17cbqvdxaa foreign key (user_id) references users (id)
+2021-08-25 23:38:17.884  INFO 5035 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-08-25 23:38:17.908  INFO 5035 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-08-25 23:38:18.238  WARN 5035 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-08-25 23:38:18.519  INFO 5035 --- [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2021-08-25 23:38:18.560  INFO 5035 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2021-08-25 23:38:18.567  INFO 5035 --- [           main] i.s.t.TicketBookingApplication           : Started TicketBookingApplication in 17.683 seconds (JVM running for 17.947)
+2021-08-25 23:38:54.605  INFO 5035 --- [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-08-25 23:38:54.605  INFO 5035 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-08-25 23:38:54.611  INFO 5035 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 6 ms
+2021-08-25 23:38:54.690  INFO 5035 --- [nio-8080-exec-1] i.s.ticketbooking.util.ShowsCache        : Movie Request for ShowRequestDTO(movieName=The Matrix, city=BANGALORE)
+Hibernate: SELECT shows.* FROM shows INNER JOIN movies ON movies.id = shows.movie_id INNER JOIN halls ON halls.id = shows.hall_id INNER JOIN cinemas ON cinemas.id = halls.cinema_id INNER JOIN addresses ON cinemas.id = addresses.cinema_id WHERE addresses.city = ? AND movies.name =?
+2021-08-25 23:38:54.750  INFO 5035 --- [nio-8080-exec-1] i.s.ticketbooking.util.ShowsCache        : Cache Stats CacheStats{hitCount=0, missCount=0, loadSuccessCount=0, loadExceptionCount=0, totalLoadTime=0, evictionCount=0}
+2021-08-25 23:38:56.251  INFO 5035 --- [nio-8080-exec-3] i.s.ticketbooking.util.ShowsCache        : Cache Stats CacheStats{hitCount=0, missCount=0, loadSuccessCount=0, loadExceptionCount=0, totalLoadTime=0, evictionCount=0}
+2021-08-25 23:38:57.076  INFO 5035 --- [nio-8080-exec-4] i.s.ticketbooking.util.ShowsCache        : Cache Stats CacheStats{hitCount=0, missCount=0, loadSuccessCount=0, loadExceptionCount=0, totalLoadTime=0, evictionCount=0}
+2021-08-25 23:40:08.084  INFO 5035 --- [nio-8080-exec-7] i.s.ticketbooking.util.ShowsCache        : Movie Request for ShowRequestDTO(movieName=The Matrix, city=PUNE)
+Hibernate: SELECT shows.* FROM shows INNER JOIN movies ON movies.id = shows.movie_id INNER JOIN halls ON halls.id = shows.hall_id INNER JOIN cinemas ON cinemas.id = halls.cinema_id INNER JOIN addresses ON cinemas.id = addresses.cinema_id WHERE addresses.city = ? AND movies.name =?
+2021-08-25 23:40:08.096  INFO 5035 --- [nio-8080-exec-7] i.s.ticketbooking.util.ShowsCache        : Cache Stats CacheStats{hitCount=0, missCount=0, loadSuccessCount=0, loadExceptionCount=0, totalLoadTime=0, evictionCount=0}
+2021-08-25 23:41:25.218  INFO 5035 --- [io-8080-exec-10] i.s.ticketbooking.util.ShowsCache        : Movie Request for ShowRequestDTO(movieName=The Matrix, city=MUMBAI)
+Hibernate: SELECT shows.* FROM shows INNER JOIN movies ON movies.id = shows.movie_id INNER JOIN halls ON halls.id = shows.hall_id INNER JOIN cinemas ON cinemas.id = halls.cinema_id INNER JOIN addresses ON cinemas.id = addresses.cinema_id WHERE addresses.city = ? AND movies.name =?
+2021-08-25 23:41:25.231  INFO 5035 --- [io-8080-exec-10] i.s.ticketbooking.util.ShowsCache        : Cache Stats CacheStats{hitCount=0, missCount=0, loadSuccessCount=0, loadExceptionCount=0, totalLoadTime=0, evictionCount=0}
+2021-08-25 23:41:29.749  INFO 5035 --- [nio-8080-exec-2] i.s.ticketbooking.util.ShowsCache        : Cache Stats CacheStats{hitCount=0, missCount=0, loadSuccessCount=0, loadExceptionCount=0, totalLoadTime=0, evictionCount=0}
+2021-08-25 23:41:31.263  INFO 5035 --- [nio-8080-exec-1] i.s.ticketbooking.util.ShowsCache        : Cache Stats CacheStats{hitCount=0, missCount=0, loadSuccessCount=0, loadExceptionCount=0, totalLoadTime=0, evictionCount=0}
+2021-08-25 23:41:31.914  INFO 5035 --- [nio-8080-exec-3] i.s.ticketbooking.util.ShowsCache        : Cache Stats CacheStats{hitCount=0, missCount=0, loadSuccessCount=0, loadExceptionCount=0, totalLoadTime=0, evictionCount=0}
+2021-08-25 23:41:32.505  INFO 5035 --- [nio-8080-exec-4] i.s.ticketbooking.util.ShowsCache        : Cache Stats CacheStats{hitCount=0, missCount=0, loadSuccessCount=0, loadExceptionCount=0, totalLoadTime=0, evictionCount=0}
+2021-08-25 23:41:32.999  INFO 5035 --- [nio-8080-exec-5] i.s.ticketbooking.util.ShowsCache        : Cache Stats CacheStats{hitCount=0, missCount=0, loadSuccessCount=0, loadExceptionCount=0, totalLoadTime=0, evictionCount=0}
+2021-08-25 23:41:33.455  INFO 5035 --- [nio-8080-exec-6] i.s.ticketbooking.util.ShowsCache        : Cache Stats CacheStats{hitCount=0, missCount=0, loadSuccessCount=0, loadExceptionCount=0, totalLoadTime=0, evictionCount=0}
+2021-08-26 00:15:09.756  INFO 5035 --- [ionShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-08-26 00:15:09.762  INFO 5035 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-08-26 00:15:09.775  INFO 5035 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
