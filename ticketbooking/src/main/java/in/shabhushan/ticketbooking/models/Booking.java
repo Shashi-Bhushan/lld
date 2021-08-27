@@ -42,7 +42,7 @@ public class Booking extends BaseEntity {
     @ToString.Exclude
     @OneToMany(
             mappedBy = "booking",
-            cascade = CascadeType.ALL,
+            cascade = CascadeType.MERGE,
             fetch = FetchType.LAZY,
             orphanRemoval = true
     )

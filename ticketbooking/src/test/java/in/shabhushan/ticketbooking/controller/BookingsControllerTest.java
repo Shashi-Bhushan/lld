@@ -6,6 +6,7 @@ import in.shabhushan.ticketbooking.dto.BookingRequestDTO;
 import in.shabhushan.ticketbooking.dto.ShowRequestDTO;
 import in.shabhushan.ticketbooking.enums.BookingStatus;
 import in.shabhushan.ticketbooking.enums.City;
+import in.shabhushan.ticketbooking.enums.SeatType;
 import in.shabhushan.ticketbooking.enums.ShowSeatStatus;
 import in.shabhushan.ticketbooking.models.Booking;
 import in.shabhushan.ticketbooking.models.Cinema;
@@ -65,19 +66,39 @@ class BookingsControllerTest {
         TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
     }
 
+    private static final int SEAT_COUNT = 4;
+
     @BeforeEach
     private void setup() {
-        Show show = showsRepository.getById(1L);
+            for (long hallNumber = 1; hallNumber <= 16; hallNumber++) {
+                Hall hall = hallsRepository.getById(hallNumber);
 
-        for (int i = 1; i <= 4; i++) {
-            Seat seat = seatsRepository.getById((long) i);
+                for (int seatLocation = 1; seatLocation <= SEAT_COUNT; seatLocation++) {
+                    Seat seat = new Seat();
+                    seat.setSeatLocation(seatLocation);
+                    seat.setUnderMaintainance(false);
+                    seat.setSeatType(SeatType.TWO_D);
+                    seat.setHall(hall);
 
-            ShowSeat showSeat = new ShowSeat();
-            showSeat.setSeat(seat);
-            showSeat.setShow(show);
-            showSeat.setSeatStatus(ShowSeatStatus.VACANT);
+                    seatsRepository.save(seat);
+                }
+            }
 
-            showSeatsRepository.save(showSeat);
+        for (long showNumber = 1; showNumber <= 16; showNumber++) {
+            long hallNumber = ((showNumber - 1) % 4) + 1;
+
+            Show show = showsRepository.getById(showNumber);
+            Hall hall = hallsRepository.getById(hallNumber);
+
+            for (Seat seat: hall.getSeats()) {
+                ShowSeat showSeat = new ShowSeat();
+                showSeat.setSeatStatus(ShowSeatStatus.VACANT);
+                showSeat.setPrice(150);
+                showSeat.setSeat(seat);
+                showSeat.setShow(show);
+
+                showSeatsRepository.save(showSeat);
+            }
         }
     }
 

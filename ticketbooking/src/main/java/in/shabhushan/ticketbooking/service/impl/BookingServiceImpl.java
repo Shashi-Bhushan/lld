@@ -17,6 +17,8 @@ import in.shabhushan.ticketbooking.service.api.RefundService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 @Service
 public class BookingServiceImpl implements BookingService {
 
@@ -32,6 +34,7 @@ public class BookingServiceImpl implements BookingService {
     @Autowired
     private RefundService refundService;
 
+    @Transactional
     public Booking createBooking(Long customerId, BookingRequestDTO bookingRequest) {
         Customer customer = customersRepository.getById(customerId);
 
@@ -43,15 +46,16 @@ public class BookingServiceImpl implements BookingService {
             throw new SeatNotAvailableException("Some of the seats are not available for booking anymore.");
         }
 
-        bookingRequest.getShowSeats().forEach(showSeat -> {
-            showSeat.setSeatStatus(ShowSeatStatus.OCCUPIED);
-            showSeatsRepository.save(showSeat);
-        });
-
         Booking booking = new Booking(customer, BookingStatus.PAYMENT_PENDING, bookingRequest.getShow());
         booking.setShowSeats(bookingRequest.getShowSeats());
 
         bookingsRepository.save(booking);
+
+        bookingRequest.getShowSeats().forEach(showSeat -> {
+            showSeat.setSeatStatus(ShowSeatStatus.OCCUPIED);
+            showSeat.setBooking(booking);
+            showSeatsRepository.save(showSeat);
+        });
 
         return booking;
     }

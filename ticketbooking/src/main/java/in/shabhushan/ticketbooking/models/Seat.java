@@ -1,6 +1,10 @@
 package in.shabhushan.ticketbooking.models;
 
 import in.shabhushan.ticketbooking.enums.SeatType;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.CascadeType;
@@ -16,6 +20,9 @@ import javax.persistence.Table;
 import java.util.HashSet;
 import java.util.Set;
 
+@Data
+@NoArgsConstructor @AllArgsConstructor
+@EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "seats")
 public class Seat extends BaseEntity {
