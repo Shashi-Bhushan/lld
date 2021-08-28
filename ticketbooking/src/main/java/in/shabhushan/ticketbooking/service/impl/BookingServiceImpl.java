@@ -5,9 +5,7 @@ import in.shabhushan.ticketbooking.enums.BookingStatus;
 import in.shabhushan.ticketbooking.enums.ShowSeatStatus;
 import in.shabhushan.ticketbooking.exceptions.bookings.exp.BookingDoesNotExistException;
 import in.shabhushan.ticketbooking.exceptions.bookings.exp.InvalidBookingStateException;
-import in.shabhushan.ticketbooking.exceptions.bookings.exp.SeatNotAvailableException;
 import in.shabhushan.ticketbooking.models.Booking;
-import in.shabhushan.ticketbooking.models.ShowSeat;
 import in.shabhushan.ticketbooking.models.users.Customer;
 import in.shabhushan.ticketbooking.repository.BookingsRepository;
 import in.shabhushan.ticketbooking.repository.ShowSeatsRepository;
@@ -35,16 +33,9 @@ public class BookingServiceImpl implements BookingService {
     private RefundService refundService;
 
     @Transactional
+    @Override
     public Booking createBooking(Long customerId, BookingRequestDTO bookingRequest) {
         Customer customer = customersRepository.getById(customerId);
-
-        if (!bookingRequest.getShow().isNotStartedOrCancelled()) {
-            throw new SeatNotAvailableException("The show is not accepting bookings anymore.");
-        }
-
-        if (bookingRequest.getShowSeats().stream().anyMatch(showSeat -> showSeat.getSeatStatus().equals(ShowSeatStatus.OCCUPIED))) {
-            throw new SeatNotAvailableException("Some of the seats are not available for booking anymore.");
-        }
 
         Booking booking = new Booking(customer, BookingStatus.PAYMENT_PENDING, bookingRequest.getShow());
         booking.setShowSeats(bookingRequest.getShowSeats());
@@ -60,20 +51,18 @@ public class BookingServiceImpl implements BookingService {
         return booking;
     }
 
+    @Transactional
     @Override
-    public Booking cancelBooking(Long bookingId) {
-        Booking booking = bookingsRepository.findById(bookingId).orElseThrow(() -> new BookingDoesNotExistException("Booking Does not exist for " + bookingId));
-
-        if (!booking.getShow().isNotStartedOrCancelled()) {
-            throw new InvalidBookingStateException("The show with booking id " + bookingId + " has already started or cancelled.");
-        }
-
+    public Booking cancelBooking(Booking booking) {
         booking.setStatus(BookingStatus.CANCELLED);
 
-        refundService.refundBooking(booking);
+        if (booking.getStatus().equals(BookingStatus.CONFIRMED)) {
+            refundService.refundBooking(booking);
+        }
 
         booking.getShowSeats().forEach(showSeat -> {
             showSeat.setSeatStatus(ShowSeatStatus.VACANT);
+            showSeat.setBooking(null);
             showSeatsRepository.save(showSeat);
         });
 

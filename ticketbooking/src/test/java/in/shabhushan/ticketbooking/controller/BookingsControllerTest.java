@@ -70,27 +70,27 @@ class BookingsControllerTest {
 
     @BeforeEach
     private void setup() {
-            for (long hallNumber = 1; hallNumber <= 16; hallNumber++) {
-                Hall hall = hallsRepository.getById(hallNumber);
+        for (long hallNumber = 1; hallNumber <= 16; hallNumber++) {
+            Hall hall = hallsRepository.getById(hallNumber);
 
-                for (int seatLocation = 1; seatLocation <= SEAT_COUNT; seatLocation++) {
-                    Seat seat = new Seat();
-                    seat.setSeatLocation(seatLocation);
-                    seat.setUnderMaintainance(false);
-                    seat.setSeatType(SeatType.TWO_D);
-                    seat.setHall(hall);
+            for (int seatLocation = 1; seatLocation <= SEAT_COUNT; seatLocation++) {
+                Seat seat = new Seat();
+                seat.setSeatLocation(seatLocation);
+                seat.setUnderMaintainance(false);
+                seat.setSeatType(SeatType.TWO_D);
+                seat.setHall(hall);
 
-                    seatsRepository.save(seat);
-                }
+                seatsRepository.save(seat);
             }
+        }
 
         for (long showNumber = 1; showNumber <= 16; showNumber++) {
-            long hallNumber = ((showNumber - 1) % 4) + 1;
+            long hallNumber = ((showNumber - 1) % SEAT_COUNT) + 1;
 
             Show show = showsRepository.getById(showNumber);
             Hall hall = hallsRepository.getById(hallNumber);
 
-            for (Seat seat: hall.getSeats()) {
+            for (Seat seat : hall.getSeats()) {
                 ShowSeat showSeat = new ShowSeat();
                 showSeat.setSeatStatus(ShowSeatStatus.VACANT);
                 showSeat.setPrice(150);
