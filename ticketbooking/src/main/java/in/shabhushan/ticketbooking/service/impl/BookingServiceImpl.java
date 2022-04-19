@@ -15,7 +15,11 @@ import in.shabhushan.ticketbooking.service.api.RefundService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+import javax.transaction.UserTransaction;
 
 @Service
 public class BookingServiceImpl implements BookingService {
@@ -32,7 +36,9 @@ public class BookingServiceImpl implements BookingService {
     @Autowired
     private RefundService refundService;
 
-    @Transactional
+    @PersistenceContext
+    private EntityManager entityManager;
+
     @Override
     public Booking createBooking(Long customerId, BookingRequestDTO bookingRequest) {
         Customer customer = customersRepository.getById(customerId);
@@ -40,15 +46,30 @@ public class BookingServiceImpl implements BookingService {
         Booking booking = new Booking(customer, BookingStatus.PAYMENT_PENDING, bookingRequest.getShow());
         booking.setShowSeats(bookingRequest.getShowSeats());
 
-        bookingsRepository.save(booking);
+        EntityTransaction utx = entityManager.getTransaction();
 
-        bookingRequest.getShowSeats().forEach(showSeat -> {
-            showSeat.setSeatStatus(ShowSeatStatus.OCCUPIED);
-            showSeat.setBooking(booking);
-            showSeatsRepository.save(showSeat);
-        });
+        try {
+            utx.begin();
+
+            saveShowSeats(bookingRequest);
+
+            bookingsRepository.save(booking);
+
+            utx.commit();
+        } catch (Exception exception) {
+            utx.rollback();
+            throw exception;
+        }
 
         return booking;
+    }
+
+    private void saveShowSeats(BookingRequestDTO bookingRequest) {
+        bookingRequest.getShowSeats().forEach(showSeat -> {
+            showSeat.setSeatStatus(ShowSeatStatus.OCCUPIED);
+            //showSeat.setBooking(booking);
+            showSeatsRepository.save(showSeat);
+        });
     }
 
     @Transactional
